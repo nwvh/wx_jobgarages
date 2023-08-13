@@ -102,7 +102,7 @@ end)
 for job,data in pairs(wx.Garages) do
     local opt = {}
     for label,model in pairs(data.Vehicles) do
-        if IsModelValid(model) then
+        if IsModelValid(model.model) then
             table.insert(opt,{
                     title = label,
                     icon = 'car-side',
@@ -113,7 +113,8 @@ for job,data in pairs(wx.Garages) do
                                 Citizen.SetTimeout(wx.Cooldown,function ()
                                     cooldown = false
                                 end)
-                                serviceVeh = CreateVehicle(model, data.SpawnPosition.x, data.SpawnPosition.y, data.SpawnPosition.z, data.SpawnPosition.w, true, false)
+                                serviceVeh = CreateVehicle(model.model, data.SpawnPosition.x, data.SpawnPosition.y, data.SpawnPosition.z, data.SpawnPosition.w, true, false)
+                                SetVehicleLivery(serviceVeh,model.livery)
                                 Notify(Locale["NotifySuccess"],Locale["NotifyWaiting"])
                             else
                                 Notify(Locale["NotifyError"],Locale["NotifyOccupied"])
@@ -147,10 +148,10 @@ for job,data in pairs(wx.Garages) do
                 title = string.upper(job).." "..Locale["Garage"],
                 options = opt
             })
-            RequestModel(model)
-            while not HasModelLoaded(model) do Citizen.Wait(10) end
+            RequestModel(model.model)
+            while not HasModelLoaded(model.model) do Citizen.Wait(10) end
         else
-            print("[ERROR] The model "..model.." located in "..job.." table is invalid!")
+            print("[ERROR] The model "..model.model.." located in "..job.." table is invalid!")
         end
     end
 end

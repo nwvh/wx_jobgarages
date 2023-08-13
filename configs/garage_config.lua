@@ -16,9 +16,9 @@ wx.Garages = {
         Scenario = "WORLD_HUMAN_CLIPBOARD", -- Ped scenario (https://pastebin.com/6mrYTdQv)
         Vehicles = {
             -- Label      -- Spawn code
-            ['Charger'] = 'code318charg',
-            ['Explorer'] = 'code320exp',
-            ['SUV'] = 'GU1',
+            ['Charger'] = { model = 'code318charg', livery = 1},
+            ['Explorer'] = { model = 'code320exp', livery = 0},
+            ['SUV'] = { model = 'GU1', livery = 0},
         }
     },
     ['unemployed'] = {
@@ -29,9 +29,9 @@ wx.Garages = {
         Ped = `s_m_y_airworker`,
         Scenario = "WORLD_HUMAN_CLIPBOARD",
         Vehicles = {
-            ['Police'] = 'police',
-            ['Police 2'] = 'police2',
-            ['Police 3'] = 'police3',
+            ['Police'] = { model = 'police', livery = 0},
+            ['Police 2'] = { model = 'police2', livery = 0},
+            ['Police 3'] = { model = 'police3', livery = 0},
         }
     },
     ['trooper'] = {
@@ -42,7 +42,7 @@ wx.Garages = {
         Ped = `s_m_y_airworker`,
         Scenario = "WORLD_HUMAN_CLIPBOARD",
         Vehicles = {
-            ['Unmarked'] = 'fbi',
+            ['Unmarked'] = { model = 'fbi', livery = 0},
         }
     },
     ['lsfd'] = {
@@ -53,7 +53,7 @@ wx.Garages = {
         Ped = `s_m_y_airworker`,
         Scenario = "WORLD_HUMAN_CLIPBOARD",
         Vehicles = {
-            ['Fire Truck'] = 'firetruk',
+            ['Fire Truck'] = { model = 'fbi', livery = 0},
         }
     },
     -- ADD HOW MANY GARAGES AND JOBS YOU WANT!
@@ -65,7 +65,7 @@ wx.Garages = {
     --     Ped = `example_ped`,
     --     Scenario = "EXAMPLE_SCENARIO",
     --     Vehicles = {
-    --         ['examplemodel'] = 'Example Label',
+    --         ['examplemodel'] = { model = 'examplemodel', livery = 0},
     --     }
     -- },
 
