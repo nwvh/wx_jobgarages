@@ -1,6 +1,6 @@
 Locale = {}
 Locale = {
-    ["TargetOpen"] = "Open %s garage",
+    ["TargetOpen"] = "Open %s %s", -- 1. %s = Job, 2. %s = garage type
     ["TargetReturn"] = "Return Vehicle",
     ["NotifySuccess"] = "Success",
     ["NotifyError"] = "Error",
@@ -9,7 +9,10 @@ Locale = {
     ["NotifyWaiting"] = "Your selected vehicle is waiting outside",
     ["NotifyOccupied"] = "The vehicle spawn point is occupied",
     ["NotifyCooldown"] = "You must wait before selecting another vehicle",
+    ["NotifyAlreadyOut"] = "Your heli is already outside! To select another one, please return the current one or wait a while.",
+    ["NotifyNoSelected"] = "You don't have any heli out.",
     ["Garage"] = "Garage",
+    ["Helipad"] = "Helipad",
 }
 
 -- Czech Translation, if you want to use it, comment the one above and uncomment the one below
@@ -23,5 +26,8 @@ Locale = {
 --     ["NotifyWaiting"] = "Tvé vybrané vozidlo čeká venku",
 --     ["NotifyOccupied"] = "Lokace pro výjezd vozidla musí být prázdná",
 --     ["NotifyCooldown"] = "Před dalším výběrem musíš chvíli počkat",
+--     ["NotifyAlreadyOut"] = "Tvá helikoptéra je již venku, pokud si chceš vybrat novou, musíš vrátit stávající nebo chvíli počkat.",
+--     ["NotifyNoSelected"] = "Nemáš vytaženou žádnou helikoptéru.",
 --     ["Garage"] = "Garáž",
+--     ["Helipad"] = "Helipad",
 -- }
