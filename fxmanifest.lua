@@ -1,5 +1,5 @@
 fx_version 'cerulean'
-version '1.0.0'
+version '1.1.0'
 game 'gta5'
 author 'wx / woox'
 description 'Advanced job garage system via ox_target and ox_lib'
