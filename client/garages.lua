@@ -1,4 +1,5 @@
 local playerJob = nil
+local spawnedNpcs = {}
 
 if string.lower(wx.Framework) == 'esx' then
     ESX = exports["es_extended"]:getSharedObject() 
@@ -51,6 +52,7 @@ Citizen.CreateThread(function ()
         while not HasModelLoaded(data.Ped) do Citizen.Wait(10) end
         for _,coords in pairs(data.Positions) do
             local npc = CreatePed(0, data.Ped, coords.x, coords.y, coords.z-1, coords.w, true, false)
+            table.insert(spawnedNpcs,npc)
             TaskStartScenarioInPlace(npc,data.Scenario,0,true)
             FreezeEntityPosition(npc, true)
             SetEntityInvincible(npc,true)
@@ -110,7 +112,7 @@ for job,data in pairs(wx.Garages) do
                     title = label,
                     icon = 'car-side',
                     onSelect = function ()
-                        if serviceVeh == nil then
+                        if not cooldown then
                             if not IsPositionOccupied(data.SpawnPosition.x, data.SpawnPosition.y, data.SpawnPosition.z,2.0,false,true,false,false,false,1,false) then
                                 cooldown = true
                                 Citizen.SetTimeout(wx.Cooldown,function ()
@@ -139,3 +141,11 @@ for job,data in pairs(wx.Garages) do
         end
     end
 end
+
+AddEventHandler('onResourceStop',function (r)
+    if r == GetCurrentResourceName() then
+        for k, npc in pairs(spawnedNpcs) do
+            DeleteEntity(npc)
+        end
+    end
+end)
