@@ -120,6 +120,9 @@ for job,data in pairs(wx.Garages) do
                                 end)
                                 serviceVeh = CreateVehicle(model.model, data.SpawnPosition.x, data.SpawnPosition.y, data.SpawnPosition.z, data.SpawnPosition.w, true, false)
                                 SetVehicleLivery(serviceVeh,model.livery)
+                                if wx.SpawnInVeh then
+                                    TaskWarpPedIntoVehicle(PlayerPedId(),serviceVeh,0)
+                                end
                                 Notify(Locale["NotifySuccess"],Locale["NotifyWaiting"])
                             else
                                 Notify(Locale["NotifyError"],Locale["NotifyOccupied"])

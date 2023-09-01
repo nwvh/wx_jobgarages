@@ -112,6 +112,9 @@ for job,data in pairs(wx.Helipads) do
                                 end)
                                 serviceHeli = CreateVehicle(model.model, data.SpawnPosition.x, data.SpawnPosition.y, data.SpawnPosition.z, data.SpawnPosition.w, true, false)
                                 SetVehicleLivery(serviceHeli,model.livery)
+                                if wx.SpawnInVeh then
+                                    TaskWarpPedIntoVehicle(PlayerPedId(),serviceHeli,0)
+                                end
                                 Notify(Locale["NotifySuccess"],Locale["NotifyWaiting"])
                             else
                                 Notify(Locale["NotifyError"],Locale["NotifyOccupied"])
