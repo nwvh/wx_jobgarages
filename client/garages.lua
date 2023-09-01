@@ -77,7 +77,7 @@ Citizen.CreateThread(function ()
                     },
                     {
                         name = 'wx_jobgarages:delete',
-                        -- distance = 50.0,
+                        distance = 15.0,
                         onSelect = function ()
                             if IsPedInAnyVehicle(PlayerPedId(),false) then
                                 TaskLeaveVehicle(PlayerPedId(),GetVehiclePedIsIn(PlayerPedId(),false),64)
