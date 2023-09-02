@@ -30,6 +30,30 @@ end
 local serviceVeh = nil
 local cooldown = false
 
+CreateThread(function()
+    while playerJob == nil do Wait(0) end
+    while true do
+        sleep = 900
+        for job,data in pairs(wx.Garages) do
+            if playerJob == job then
+                for _,coords in pairs(data.Positions) do
+                    local playerCoords = GetEntityCoords(PlayerPedId())
+                    local dist = #(playerCoords - vec3(coords.x, coords.y, coords.z))
+                    if dist < 5.0 and IsPedInAnyVehicle(PlayerPedId(), false) then
+                        sleep = 0
+                        ESX.ShowHelpNotification('Presiona E para guardar el vehículo')
+                        if IsControlJustPressed(0, 38) then
+                            DeleteEntity(GetVehiclePedIsIn(PlayerPedId(), false))
+                        end
+                    end
+                end
+            end
+        end
+
+        Wait(sleep)
+    end
+end)
+
 Citizen.CreateThread(function ()
     for job,data in pairs(wx.Garages) do
         Citizen.SetTimeout(6000,function () -- Wait for framework to retrieve player job and then add the blips
@@ -51,7 +75,8 @@ Citizen.CreateThread(function ()
         RequestModel(data.Ped)
         while not HasModelLoaded(data.Ped) do Citizen.Wait(10) end
         for _,coords in pairs(data.Positions) do
-            local npc = CreatePed(0, data.Ped, coords.x, coords.y, coords.z-1, coords.w, true, false)
+            npc = CreatePed(0, data.Ped, vec3(coords.x, coords.y, coords.z-1), true)
+            SetEntityHeading(npc, coords.w)
             table.insert(spawnedNpcs,npc)
             TaskStartScenarioInPlace(npc,data.Scenario,0,true)
             FreezeEntityPosition(npc, true)
@@ -77,7 +102,7 @@ Citizen.CreateThread(function ()
                     },
                     {
                         name = 'wx_jobgarages:delete',
-                        distance = 15.0,
+                        -- distance = 50.0,
                         onSelect = function ()
                             if IsPedInAnyVehicle(PlayerPedId(),false) then
                                 TaskLeaveVehicle(PlayerPedId(),GetVehiclePedIsIn(PlayerPedId(),false),64)
@@ -120,9 +145,6 @@ for job,data in pairs(wx.Garages) do
                                 end)
                                 serviceVeh = CreateVehicle(model.model, data.SpawnPosition.x, data.SpawnPosition.y, data.SpawnPosition.z, data.SpawnPosition.w, true, false)
                                 SetVehicleLivery(serviceVeh,model.livery)
-                                if wx.SpawnInVeh then
-                                    TaskWarpPedIntoVehicle(PlayerPedId(),serviceVeh,0)
-                                end
                                 Notify(Locale["NotifySuccess"],Locale["NotifyWaiting"])
                             else
                                 Notify(Locale["NotifyError"],Locale["NotifyOccupied"])
