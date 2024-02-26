@@ -41,7 +41,6 @@ CreateThread(function()
                     local dist = #(playerCoords - vec3(coords.x, coords.y, coords.z))
                     if dist < 5.0 and IsPedInAnyVehicle(PlayerPedId(), false) then
                         sleep = 0
-                        ESX.ShowHelpNotification('Presiona E para guardar el vehículo')
                         if IsControlJustPressed(0, 38) then
                             DeleteEntity(GetVehiclePedIsIn(PlayerPedId(), false))
                         end
@@ -49,7 +48,6 @@ CreateThread(function()
                 end
             end
         end
-
         Wait(sleep)
     end
 end)
